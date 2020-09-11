@@ -8,17 +8,18 @@ __author__ = "Gordon Mathurin"
 import sys
 import argparse
 
-"""
-positional arguments:
-        text         text to be manipulated
+# usage: echo.py[-h][-u][-l][-t] text
 
-    optional arguments:
-        -h, --help   show this help message and exit
-        -u, --upper  convert text to uppercase
-        -l, --lower  convert text to lowercase
-        -t, --title  convert text to titlecase
+# Perform transformation on input text.
 
-"""
+# positional arguments:
+#     text         text to be manipulated
+
+# optional arguments:
+#     -h, --help   show this help message and exit
+#     -u, --upper  convert text to uppercase
+#     -l, --lower  convert text to lowercase
+#     -t, --title  convert text to titlecase
 
 
 def create_parser():
@@ -30,10 +31,10 @@ def create_parser():
         '-u', '--upper', help='convert text to uppercase', action='store_true')
 
     paser.add_argument(
-        '-l', '--lower', help='convert text lowercase', action='store_true')
+        '-l', '--lower', help='convert text to lowercase', action='store_true')
 
     paser.add_argument(
-        '-t', '--title', help='convert text titlecase', action='store_true')
+        '-t', '--title', help='convert text to titlecase', action='store_true')
 
     paser.add_argument('text', help='text to be manipulated')
     return paser
@@ -46,13 +47,22 @@ def main(args):
     paser = create_parser()
     ns = paser.parse_args(args)
 
-    text = ns.text
-    print(text)
-
     if not ns:
         paser.print_usage()
         sys.exit(1)
-    return
+        return
+
+    text = ns.text
+    # print(text)
+
+    if ns.upper:
+        print(text.upper())
+    elif ns.lower:
+        print(text.lower())
+    elif ns.title:
+        print(text.title())
+    else:
+        print(text)
 
 
 if __name__ == '__main__':
